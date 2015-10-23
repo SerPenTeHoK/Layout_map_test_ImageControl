@@ -27,3 +27,7 @@ vpproject
 .lock
 teamworkUser.xml
 projectFilesBackup*
+/.idea/*
+.idea/*
+/out/*
+out/*
