@@ -1,5 +1,5 @@
 .DS_Store
-.idea
+
 *.log
 *.jdbc
 *.iml
@@ -27,7 +27,3 @@ vpproject
 .lock
 teamworkUser.xml
 projectFilesBackup*
-/.idea/*
-.idea/*
-/out/*
-out/*
