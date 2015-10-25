@@ -1,8 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +27,9 @@ public class testMa {
     private static JFrame frame;
 
 
+    Point startMousePoint;
+
+
     public testMa() {
         // установим у главной панели по краям
         GL_panel.setLayout(new BorderLayout());
@@ -42,12 +44,12 @@ public class testMa {
         panel_menu.add(button2);
 
         panel_Work = new JPanel();
-        panel_Work.setSize(300, 300);
+        panel_Work.setSize(400, 400);
         GL_panel.add(panel_Work, BorderLayout.CENTER);
         panel_Work.setLayout(new GridLayout(1,1));
 
-        frame.setSize(100, 100);
-        frame.resize(100, 100);
+       //frame.setSize(100, 100);
+        //frame.resize(100, 100);
         frame.repaint();
 
         imagePanel = new ImagePanel();
@@ -56,9 +58,6 @@ public class testMa {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
-
                 try {
                     imagePanel.setImage(ImageIO.read(new File("card.jpg")));
                 } catch (IOException e1) {
@@ -77,8 +76,49 @@ public class testMa {
                 int height = imagePanel.getImage().getHeight(observer);
                 //frame.setSize(width+frame.getWidth(), height+frame.getHeight());
 
-                frame.resize(width+100,height+100);
+                //frame.resize(width+100,height+100);
+                frame.resize(400,400);
                 frame.repaint();
+            }
+        });
+
+        imagePanel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(e.isShiftDown())
+                {
+                    startMousePoint = e.getPoint();
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if(e.isShiftDown()) {
+                    Point endMousePoint = e.getPoint();
+                    /// тупо set center map...
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        imagePanel.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                int mouserot = e.getWheelRotation();
+                // количество вращений колёсико на себя это + от себя - zoom
             }
         });
     }
